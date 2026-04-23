@@ -36,7 +36,7 @@ export const fetchOrderDetails = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data);
     }
   },
 );
@@ -73,7 +73,7 @@ const orderSlice = createSlice({
       })
       .addCase(fetchOrderDetails.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload;
+        state.orderDetails = action.payload;
       })
       .addCase(fetchOrderDetails.rejected, (state, action) => {
         state.loading = false;

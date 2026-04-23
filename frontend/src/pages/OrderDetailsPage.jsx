@@ -44,12 +44,12 @@ const OrderDetailsPage = () => {
               </span>
               <span
                 className={`${
-                  orderDetails.isDeliverd
+                  orderDetails.isDelivered
                     ? "bg-green-100 text-green-700"
                     : "bg-yellow-100 text-yellow-700"
                 } px-3 py-1 rounded-full text-sm font-medium mb-2`}
               >
-                {orderDetails.isDeliverd ? "Delivered" : "Pending Delivery"}
+                {orderDetails.isDelivered ? "Delivered" : "Pending Delivery"}
               </span>
             </div>
           </div>
@@ -65,7 +65,7 @@ const OrderDetailsPage = () => {
               <p>Shipping Method: {orderDetails.shippingMethod}</p>
               <p>
                 Address:{" "}
-                {`${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.country}`}
+                {`${orderDetails.shippingAddress?.address},${orderDetails.shippingAddress?.city}, ${orderDetails.shippingAddress?.country}`}
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ const OrderDetailsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {orderDetails.orderItems.map((item) => (
+                {orderDetails.orderItems?.map((item) => (
                   <tr key={item.productId} className="border-b">
                     <td className="py-2 px-4 flex items-center">
                       <img
