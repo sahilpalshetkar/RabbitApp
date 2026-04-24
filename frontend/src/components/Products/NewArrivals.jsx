@@ -9,8 +9,8 @@ const NewArrivals = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(false);
-  const [CanScrollLeft, setCanScrollLeft] = useState(false);
-  const [CanScrollRight, setCanScrollRight] = useState(true);
+  const [canScrollLeft, setCanScrollLeft] = useState(0);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const [newArrivals, setNewArrivals] = useState([]);
 
@@ -20,7 +20,7 @@ const NewArrivals = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`,
         );
-        setNewArrivals(response.data);
+        setNewArrivals(response.data.products || response.data);
       } catch (error) {
         console.error(error);
       }
@@ -30,12 +30,14 @@ const NewArrivals = () => {
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
+    if (!scrollRef.current) return;
     setStartX(e.pageX - scrollRef.current.offsetLeft);
     setScrollLeft(scrollRef.current.scrollLeft);
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
+    if (!scrollRef.current) return;
     const x = e.pageX - scrollRef.current.offsetLeft;
     const walk = x - startX;
     scrollRef.current.scrollLeft = scrollLeft - walk;
@@ -46,8 +48,9 @@ const NewArrivals = () => {
   };
 
   const scroll = (direction) => {
+    if (!scrollRef.current) return;
     const scrollAmount = direction === "left" ? -300 : 300;
-    scrollRef.current.scrollBy({ left: scrollAmount, behaviour: "smooth" });
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
 
   //Update Scroll Buttons
@@ -79,16 +82,16 @@ const NewArrivals = () => {
         <h2 className="text-3xl font-bold mb-4">Explore New Arrivals</h2>
         <p className="text-lg text-gray-600 mb-8">
           Discover the latest styles straight off the runway, freshly added to
-          keep your wordrobe on the cutting edge of fashion.
+          keep your wardrobe on the cutting edge of fashion.
         </p>
 
         {/* Scroll Buttons  */}
         <div className="absolute right-0 bottom-[-30px] flex space-x-2">
           <button
             onClick={() => scroll("left")}
-            disabled={!CanScrollLeft}
+            disabled={!canScrollLeft}
             className={`p-2 rounded border ${
-              CanScrollLeft
+              canScrollLeft
                 ? "bg-white text-black"
                 : "bg-gray-200 text-gray-600 cursor-not-allowed"
             }`}
@@ -97,8 +100,9 @@ const NewArrivals = () => {
           </button>
           <button
             onClick={() => scroll("right")}
+            disabled={!canScrollRight}
             className={`p-2 rounded border ${
-              CanScrollRight
+              canScrollRight
                 ? "bg-white text-black"
                 : "bg-gray-200 text-gray-600 cursor-not-allowed"
             }`}
@@ -111,7 +115,7 @@ const NewArrivals = () => {
       {/* Scrollable Content */}
       <div
         ref={scrollRef}
-        className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`container mx-auto overflow-x-scroll flex space-x-6 relative scroll-smooth ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUpOrLeave}
@@ -125,6 +129,7 @@ const NewArrivals = () => {
             <img
               src={product.images[0]?.url}
               alt={product.images[0]?.altText || product.name}
+              loading="lazy"
               className="w-full h-[500px] object-cover rounded-lg"
               draggable="false"
             />

@@ -11,6 +11,7 @@ const GenderCollectionSection = () => {
           <img
             src={womensCollectionImage}
             alt="Women's Collection"
+            loading="lazy"
             className="w-full h-[700px] object-cover"
           />
           <div className="absolute bottom-8 left-8 bg-white/90 p-4">
@@ -30,6 +31,7 @@ const GenderCollectionSection = () => {
           <img
             src={mensCollectionImage}
             alt="Men's Collection"
+            loading="lazy"
             className="w-full h-[700px] object-cover"
           />
           <div className="absolute bottom-8 left-8 bg-white/90 p-4">

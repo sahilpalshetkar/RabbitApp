@@ -88,6 +88,7 @@ const OrderDetailsPage = () => {
                       <img
                         src={item.image}
                         alt={item.name}
+                        loading="lazy"
                         className="w-12 h-12 object-cover rounded-lg mr-4"
                       />
                       <Link

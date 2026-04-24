@@ -31,6 +31,7 @@ const FeaturedCollection = () => {
           <img
             src={featured}
             alt="Featured Collection"
+            loading="lazy"
             className="w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl"
           />
         </div>

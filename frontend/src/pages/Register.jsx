@@ -105,6 +105,7 @@ const Register = () => {
           <img
             src={register}
             alt="Login to Account"
+            loading="lazy"
             className="h-[750px] w-full object-cover"
           />
         </div>

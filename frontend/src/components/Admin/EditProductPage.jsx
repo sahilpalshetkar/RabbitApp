@@ -201,6 +201,7 @@ const EditProductPage = () => {
                 <img
                   src={image.url}
                   alt={image.altText || "Product Image"}
+                  loading="lazy"
                   className="w-20 h-20 object-cover rounded-md shadow-md"
                 />
               </div>

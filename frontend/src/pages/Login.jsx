@@ -94,6 +94,7 @@ const Login = () => {
           <img
             src={login}
             alt="Login to Account"
+            loading="lazy"
             className="h-[750px] w-full object-cover"
           />
         </div>

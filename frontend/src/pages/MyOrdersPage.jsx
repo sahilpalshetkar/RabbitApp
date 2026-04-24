@@ -48,6 +48,7 @@ const MyOrdersPage = () => {
                     <img
                       src={order.orderItems[0]?.image}
                       alt={order.orderItems[0]?.name}
+                      loading="lazy"
                       className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg"
                     />
                   </td>

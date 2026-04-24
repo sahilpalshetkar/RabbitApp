@@ -41,6 +41,7 @@ const CartContents = ({ cart, userId, guestId }) => {
             <img
               src={product.image}
               alt={product.name}
+              loading="lazy"
               className="w-20 h-24 object-cover mr-4 rounded"
             />
             <div>

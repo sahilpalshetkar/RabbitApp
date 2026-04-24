@@ -7,6 +7,7 @@ const Hero = () => {
       <img
         src={heroImg}
         alt="Rabbit"
+        loading="lazy"
         className="w-full h-[400px] md:h-[600px] lg:h-[750px] object-cover"
       />
       <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
